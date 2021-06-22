@@ -9,7 +9,8 @@ use Validator;
 class ProductsController extends Controller
 {
 
-    public function index(){
+    public function index()
+    {
         $products = Products::select("products.*")->get()->toArray();
         return response()->json($products);
     }
@@ -63,41 +64,7 @@ class ProductsController extends Controller
         }else{
             return response()->json(["error"=>"Erro ao alterar"]);
         }
-
-        /*
-        $input = $request->all();
-        $validator = Validator::make($input, [
-            'name' => 'required|max:60',
-            'price' => 'required|numeric',
-            'stock' => 'required|numeric',
-        ]);
-        if ($validator->fails()) {
-            return response()->json([
-                'ok' => false,
-                'error' => $validator->messages(),
-            ]);
-        }
-        try {
-            $products = Products::find($id);
-            if ($products == false) {
-                return response()->json([
-                    "ok" => false,
-                    "error" => "Não foi encontrado",
-                ]);
-            }
-            $products->update($input);
-            return response()->json([
-                "ok" => true,
-                "message" => "Alterado com Sucesso",
-            ]);
-        } catch (\Exception $ex) {
-            return response()->json([
-                "ok" => false,
-                "error" => $ex->getMessage(),
-            ]);
-        }
-
-        */        
+             
     }
 
     public function destroy($id)
