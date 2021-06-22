@@ -7,11 +7,12 @@ use Illuminate\Http\Request;
 use  JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 
-class  AuthController extends  Controller {
-    
+class  AuthController extends  Controller 
+{    
     public  $loginAfterSignUp = true;
 
-    public  function  register(Request  $request) {
+    public  function  register(Request  $request) 
+    {
         $user = new  User();
         $user->name = $request->name;
         $user->email = $request->email;
@@ -28,7 +29,8 @@ class  AuthController extends  Controller {
         ], 200);
     }
 
-    public  function  login(Request  $request) {
+    public  function  login(Request  $request) 
+    {
         $input = $request->only('email', 'password');
         $jwt_token = null;
         if (!$jwt_token = JWTAuth::attempt($input)) {
@@ -44,7 +46,8 @@ class  AuthController extends  Controller {
         ]);
     }
 
-    public  function  logout(Request  $request) {
+    public  function  logout(Request  $request) 
+    {
         $this->validate($request, [
             'token' => 'required'
         ]);
@@ -63,7 +66,8 @@ class  AuthController extends  Controller {
         }
     }
 
-    public  function  getAuthUser(Request  $request) {
+    public  function  getAuthUser(Request  $request) 
+    {
         $this->validate($request, [
             'token' => 'required'
         ]);
@@ -72,7 +76,8 @@ class  AuthController extends  Controller {
         return  response()->json(['user' => $user]);
     }
 
-    protected function jsonResponse($data, $code = 200) {        
+    protected function jsonResponse($data, $code = 200) 
+    {        
         return response()->json($data, $code,
         ['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'], JSON_UNESCAPED_UNICODE);
     }
